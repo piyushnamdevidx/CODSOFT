@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>⏱ Pomodoro Timer</h2>
+<p>25 mins focus • 5 mins break</p>
+
+<div id="timer" style="font-size: 48px; margin: 20px 0; font-weight: bold;">25:00</div>
+
+<div>
+    <button onclick="startTimer()" style="padding: 10px 20px; margin-right: 10px;">▶ Start</button>
+    <button onclick="resetTimer()" style="padding: 10px 20px;">🔁 Reset</button>
+</div>
+
+<script>
+    let timeLeft = 1500;
+    let timer;
+
+    function updateTimer() {
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+        document.getElementById("timer").textContent =
+            `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    function startTimer() {
+        clearInterval(timer);
+        timer = setInterval(() => {
+            if (timeLeft > 0) {
+                timeLeft--;
+                updateTimer();
+            } else {
+                clearInterval(timer);
+                alert("⏳ Time's up! Take a break.");
+            }
+        }, 1000);
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        timeLeft = 1500;
+        updateTimer();
+    }
+
+    updateTimer(); // Initial display
+</script>
+
+<p style="margin-top: 20px;">
+    <a href="{{ url_for('dashboard') }}">⬅ Back to Tasks</a>
+</p>
+
+{% endblock %}

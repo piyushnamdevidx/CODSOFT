@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>📝 Register for FocusFlow</h2>
+
+<form method="POST" style="margin-top: 20px; max-width: 300px;">
+    <input type="text" name="username" placeholder="Create a username" required style="margin-bottom: 10px; width: 100%; padding: 8px;"><br>
+    <input type="password" name="password" placeholder="Create a password" required style="margin-bottom: 10px; width: 100%; padding: 8px;"><br>
+    <button type="submit" style="padding: 8px 16px;">Register</button>
+</form>
+
+<p style="margin-top: 15px;">
+    Already have an account? <a href="{{ url_for('login') }}">Login here</a>
+</p>
+
+{% endblock %}

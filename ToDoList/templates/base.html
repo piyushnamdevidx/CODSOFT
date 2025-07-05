@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>🧠 FocusDarkFlow |Your Productivity Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+    body {
+        background-color: #121212;
+        color: #eee;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    a { color: #00bfff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .flashes li {
+        color: #ff6961;
+        list-style-type: none;
+        margin-bottom: 5px;
+    }
+</style>
+
+</head>
+<body>
+    <button onclick="toggleTheme()" style="position: fixed; top: 20px; right: 20px;">🌓 Toggle Theme</button>
+
+
+    <div class="container">
+
+        <!-- Navbar -->
+        <nav style="margin-bottom: 20px;">
+            <a href="{{ url_for('dashboard') }}">📋 Tasks</a> |
+            <a href="{{ url_for('pomodoro') }}">⏱ Pomodoro</a> |
+            <a href="{{ url_for('stats') }}">📊 Stats</a> |
+            <a href="{{ url_for('logout') }}">🔓 Logout</a>
+        </nav>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Page Content -->
+         <h1 style="margin-bottom: 30px;">⚡ FocusFlow</h1>
+        {% block content %}{% endblock %}
+
+    </div>
+<script>
+function toggleTheme() {
+    const current = document.body.dataset.theme;
+    const next = current === "dark" ? "light" : "dark";
+    document.body.dataset.theme = next;
+    localStorage.setItem("theme", next);
+    applyTheme(next);
+}
+
+function applyTheme(theme) {
+    if (theme === "dark") {
+        document.body.style.backgroundColor = "#0f0f0f";
+        document.body.style.color = "#f0f0f0";
+    } else {
+        document.body.style.backgroundColor = "#ffffff";
+        document.body.style.color = "#111";
+    }
+}
+
+// Load saved theme on page load
+window.onload = function() {
+    let saved = localStorage.getItem("theme") || "dark";
+    document.body.dataset.theme = saved;
+    applyTheme(saved);
+};
+</script>
+
+</body>
+</html>
