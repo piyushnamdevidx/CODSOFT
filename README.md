@@ -1,6 +1,6 @@
-# 💻 CODSOFT Internship Project Collection
+# 💻 Project Collection
 
-This repository contains the full collection of my projects completed during the **CODSOFT Internship**, each organized in its own folder for clarity and modularity.
+This repository contains the full collection of my projects completed, each organized in its own folder for clarity and modularity.
 
 ---
 
